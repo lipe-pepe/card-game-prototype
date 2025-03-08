@@ -1,4 +1,4 @@
-import Card from "./card";
+const Card = require("./card");
 
 class Deck {
   constructor() {
@@ -11,12 +11,14 @@ class Deck {
 
     let cards = [];
 
-    for (i = 0; i < colors.length; i++) {
-      for (j = 0; j < values.length; j++) {
-        cards.push(new Card(value[j], colors[i]));
+    for (let i = 0; i < colors.length; i++) {
+      for (let j = 0; j < values.length; j++) {
+        cards.push(new Card(values[j], colors[i]));
       }
     }
 
     return cards;
   }
 }
+
+module.exports = Deck;
