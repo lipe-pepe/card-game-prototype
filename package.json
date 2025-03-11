@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "node src/game.js"
   },
   "keywords": [],
   "author": "",
@@ -11,5 +12,6 @@
   "description": "",
   "devDependencies": {
     "jest": "^29.7.0"
-  }
+  },
+  "type": "module"
 }
