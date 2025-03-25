@@ -4,6 +4,7 @@ class Player {
   name: string;
   lifeNumber: number;
   hand: Card[];
+  slots: (Card | null)[];
 
   constructor(name: string) {
     this.name = name;
@@ -12,6 +13,7 @@ class Player {
     this.lifeNumber = this.#getRandomInt(100);
 
     this.hand = [];
+    this.slots = [null, null, null, null, null];
   }
 
   #getRandomInt(max: number) {
@@ -23,6 +25,21 @@ class Player {
       this.hand = cards;
     } else {
       console.error(`Couldn't set new hand for ${this.name}`);
+    }
+  }
+
+  addToHand(card: Card) {
+    this.hand.push(card);
+  }
+
+  removeFromHand(position: number) {
+    if (position >= 0 && position < this.hand.length) {
+      const removed = this.hand.splice(position, 1)[0];
+      return removed;
+    } else {
+      console.error(
+        `Couldn't remove card at position ${position} from ${this.name}'s hand`
+      );
     }
   }
 }

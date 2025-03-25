@@ -1,6 +1,7 @@
 import Player from "../classes/player";
 import askQuestion from "./askQuestion";
 import drawCards from "./drawCards";
+import playerDiscard from "./playerDiscard";
 
 const playerMove = async (player: Player) => {
   let playerInput;
@@ -12,8 +13,14 @@ const playerMove = async (player: Player) => {
 
   do {
     playerInput = await askQuestion("\nEnter your move » ");
-    if (playerInput != 1 && playerInput != 2) {
-      console.log("■ Invalid option!");
+    switch (playerInput) {
+      case "1":
+        const discardedCard = await playerDiscard(player);
+        return discardedCard;
+      case "2":
+        break;
+      default:
+        console.log("■ Invalid option!");
     }
   } while (playerInput != 1 && playerInput != 2);
 };

@@ -5,9 +5,11 @@ import Card from "./card";
 
 class Deck {
   private deck: Card[];
+  private discard: Card[];
 
   constructor() {
     this.deck = this.#createDeck();
+    this.discard = [];
   }
 
   #createDeck() {
@@ -34,6 +36,11 @@ class Deck {
   drawCards(amount: number) {
     const drawn = this.deck.splice(0, amount);
     return drawn;
+  }
+
+  discardCard(card: Card) {
+    this.discard.push(card);
+    console.log(this.discard);
   }
 }
 
