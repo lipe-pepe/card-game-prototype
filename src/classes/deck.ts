@@ -30,6 +30,11 @@ class Deck {
   getDeck() {
     return this.deck;
   }
+
+  drawCards(amount: number) {
+    const drawn = this.deck.splice(0, amount);
+    return drawn;
+  }
 }
 
 export default Deck;
