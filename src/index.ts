@@ -1,5 +1,7 @@
 import Deck from "./classes/deck";
+import Player from "./classes/player";
 
-const deck: Deck = new Deck();
+const deck = new Deck();
 
-console.log(deck.getDeck());
+const p1 = new Player("P1");
+const p2 = new Player("P2");
