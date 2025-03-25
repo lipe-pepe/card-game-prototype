@@ -1,5 +1,6 @@
 import CardColor from "../types/cardColor";
 import CardSymbol from "../types/cardSymbol";
+import shuffleArray from "../utils/shuffleArray";
 import Card from "./card";
 
 class Deck {
@@ -20,6 +21,8 @@ class Deck {
         deck.push(new Card(cardSymbols[j], cardColors[i]));
       }
     }
+
+    shuffleArray(deck);
 
     return deck;
   }
