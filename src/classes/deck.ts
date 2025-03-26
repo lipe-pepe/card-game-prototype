@@ -34,6 +34,10 @@ class Deck {
   }
 
   drawCards(amount: number) {
+    if (this.deck.length < amount) {
+      shuffleArray(this.discard);
+      this.deck = this.deck.concat(this.discard);
+    }
     const drawn = this.deck.splice(0, amount);
     return drawn;
   }
