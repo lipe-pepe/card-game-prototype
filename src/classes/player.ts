@@ -42,6 +42,18 @@ class Player {
       );
     }
   }
+
+  placeCard(position: number, card: Card) {
+    if (position >= 0 && position < this.slots.length) {
+      // Removes a card from the slot and places another one in it
+      const removed = this.slots.splice(position, 1, card)[0];
+      return removed;
+    } else {
+      console.error(
+        `Couldn't remove card at position ${position} from ${this.name}'s hand`
+      );
+    }
+  }
 }
 
 export default Player;

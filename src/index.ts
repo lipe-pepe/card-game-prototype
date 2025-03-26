@@ -33,7 +33,7 @@ async function main() {
       deck.discardCard(discarded);
     }
 
-    // console.clear();
+    console.clear();
   }
 }
 
