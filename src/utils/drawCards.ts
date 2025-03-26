@@ -6,9 +6,9 @@ const drawCards = (cards: (Card | null)[]) => {
 
   cards.forEach((card) => {
     if (card != null) {
-      rows[0].push("┌───┐");
-      rows[1].push(`│ ${card.symbol} │`);
-      rows[2].push("└───┘");
+      rows[0].push(`\x1b[${card.color}m┌───┐\x1b[0m`);
+      rows[1].push(`\x1b[${card.color}m│ ${card.symbol} │\x1b[0m`);
+      rows[2].push(`\x1b[${card.color}m└───┘\x1b[0m`);
     } else {
       rows[0].push("┌ ─ ┐");
       rows[1].push(`     `);
