@@ -50,7 +50,7 @@ async function main() {
     }
   }
 
-  console.log(`\n\x1b[96m${curPlayer?.name} won the game!!! \x1b[0m`);
+  console.log(`\n\x1b[96m${curPlayer?.name} won the game!!! \x1b[0m\n`);
 }
 
 main();

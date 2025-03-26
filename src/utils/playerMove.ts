@@ -1,11 +1,10 @@
 import Player from "../classes/player";
+import { gameConfig } from "../config/gameConfig";
 import askQuestion from "./askQuestion";
 import playerPlaceCard from "./playerPlaceCard";
 import playerSelectCard from "./playerSelectCard";
 import printHand from "./printHand";
 import printWarning from "./printWarning";
-
-const MAX_DISCARDS = 2;
 
 const playerMove = async (player: Player) => {
   let playerInput;
@@ -14,9 +13,9 @@ const playerMove = async (player: Player) => {
 
   printHand(player);
 
-  if (player.getDiscardCount() >= MAX_DISCARDS) {
+  if (player.getDiscardCount() >= gameConfig.maxDiscards) {
     printWarning(
-      "Max discards reached. You can't discard straight away at this round."
+      `Max discards (${gameConfig.maxDiscards}) reached. You can't discard straight away at this round.`
     );
     cardToDiscard = await playerPlaceCard(player);
   } else {
