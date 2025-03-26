@@ -89,7 +89,9 @@ class Player {
       const removed = this.slots.splice(position, 1, card)[0];
       if (removed) {
         console.log(
-          `\n${this.name} swapped \x1b[${removed?.color}m[${removed?.symbol}]\x1b[0m with \x1b[${card.color}m[${card.symbol}]\x1b[0m`
+          `\n${
+            this.name
+          } swapped ${removed.getString()} with ${card.getString()}`
         );
       }
 
