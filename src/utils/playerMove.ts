@@ -3,6 +3,7 @@ import { gameConfig } from "../config/gameConfig";
 import askQuestion from "./askQuestion";
 import playerPlaceCard from "./playerPlaceCard";
 import playerSelectCard from "./playerSelectCard";
+import printError from "./printError";
 import printHand from "./printHand";
 import printWarning from "./printWarning";
 
@@ -35,7 +36,7 @@ const playerMove = async (player: Player) => {
           cardToDiscard = await playerPlaceCard(player);
         }
       } else {
-        console.log("■ Invalid option!");
+        printError("Invalid option!");
       }
     } while (!options.includes(Number(playerInput)));
   }

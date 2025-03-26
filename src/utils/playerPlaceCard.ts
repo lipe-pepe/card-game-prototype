@@ -1,6 +1,7 @@
 import Player from "../classes/player";
 import askQuestion from "./askQuestion";
 import playerSelectCard from "./playerSelectCard";
+import printError from "./printError";
 import printHand from "./printHand";
 
 const playerPlaceCard = async (player: Player) => {
@@ -32,7 +33,7 @@ const playerPlaceCard = async (player: Player) => {
     if (slotOptions.includes(Number(playerInput))) {
       selectedSlot = Number(playerInput) - 1;
     } else {
-      console.log("■ Invalid option!");
+      printError("Invalid option!");
     }
   } while (!slotOptions.includes(Number(playerInput)));
 

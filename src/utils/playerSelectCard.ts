@@ -1,5 +1,6 @@
 import Player from "../classes/player";
 import askQuestion from "./askQuestion";
+import printError from "./printError";
 
 const playerSelectCard = async (player: Player) => {
   let playerInput;
@@ -19,7 +20,7 @@ const playerSelectCard = async (player: Player) => {
       const selected = player.removeFromHand(Number(playerInput) - 1);
       return selected;
     } else {
-      console.log("■ Invalid option!");
+      printError("Invalid option!");
     }
   } while (!options.includes(Number(playerInput)));
 };
