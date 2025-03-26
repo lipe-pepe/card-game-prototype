@@ -10,8 +10,11 @@ const drawGame = (player1: Player, player2: Player, curPlayer: Player) => {
   );
   console.log("\n");
   console.log(drawCards(player1.slots));
+  console.log(`Result: ${player1.getResult() || "--"}`);
   console.log("\n");
   console.log(drawCards(player2.slots));
+  console.log(`Result: ${player2.getResult() || "--"}`);
+
   console.log("\n");
   console.log(
     `${curPlayer === player2 ? "\x1b[92m" : ""}${player2.name} (${

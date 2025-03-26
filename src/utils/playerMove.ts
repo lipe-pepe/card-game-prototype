@@ -1,6 +1,7 @@
 import Player from "../classes/player";
 import askQuestion from "./askQuestion";
 import drawCards from "./drawCards";
+import drawHand from "./drawHand";
 import playerPlaceCard from "./playerPlaceCard";
 import playerSelectCard from "./playerSelectCard";
 
@@ -8,8 +9,7 @@ const playerMove = async (player: Player) => {
   let playerInput;
   let cardToDiscard;
 
-  console.log("\nYour hand: ");
-  console.log(drawCards(player.hand));
+  drawHand(player);
 
   console.log("\nMake a move.\n\t1 - Discard a card\n\t2 - Use a card");
 
