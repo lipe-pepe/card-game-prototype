@@ -42,8 +42,15 @@ async function main() {
     curPlayerIndex++;
     if (curPlayerIndex >= players.length) curPlayerIndex = 0;
 
-    console.clear();
+    // Checks win
+    if (curPlayer.getResult() === players[curPlayerIndex].lifeNumber) {
+      gameOver = true;
+    } else {
+      console.clear();
+    }
   }
+
+  console.log(`\n\x1b[96m${curPlayer?.name} won the game!!! \x1b[0m`);
 }
 
 main();
