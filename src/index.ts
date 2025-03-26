@@ -38,6 +38,10 @@ async function main() {
       deck.discardCard(discarded);
     }
 
+    // Next turn
+    curPlayerIndex++;
+    if (curPlayerIndex >= players.length) curPlayerIndex = 0;
+
     console.clear();
   }
 }
