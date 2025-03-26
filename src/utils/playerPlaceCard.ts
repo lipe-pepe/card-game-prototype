@@ -1,7 +1,7 @@
 import Player from "../classes/player";
 import askQuestion from "./askQuestion";
-import drawHand from "./drawHand";
 import playerSelectCard from "./playerSelectCard";
+import printHand from "./printHand";
 
 const playerPlaceCard = async (player: Player) => {
   let playerInput;
@@ -47,7 +47,7 @@ const playerPlaceCard = async (player: Player) => {
 
   // 4. Discards a card if there are 4 cards in hand
   if (discardedCard != null) {
-    drawHand(player);
+    printHand(player);
 
     console.log("\nSelect a card to discard:\n");
     discardedCard = await playerSelectCard(player);

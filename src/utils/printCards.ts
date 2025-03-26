@@ -1,6 +1,6 @@
 import Card from "../classes/card";
 
-const drawCards = (cards: (Card | null)[]) => {
+const printCards = (cards: (Card | null)[]) => {
   // To draw a card, its necessary 3 rows.
   const rows: string[][] = [[], [], []];
 
@@ -18,4 +18,4 @@ const drawCards = (cards: (Card | null)[]) => {
   return rows.map((row) => row.join(" ")).join("\n");
 };
 
-export default drawCards;
+export default printCards;

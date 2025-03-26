@@ -1,7 +1,7 @@
 import Deck from "./classes/deck";
 import Player from "./classes/player";
-import drawGame from "./utils/drawGame";
 import playerMove from "./utils/playerMove";
+import printGame from "./utils/printGame";
 
 async function main() {
   console.clear();
@@ -24,7 +24,7 @@ async function main() {
   while (!gameOver) {
     curPlayer = players[curPlayerIndex];
 
-    drawGame(p1, p2, curPlayer);
+    printGame(p1, p2, curPlayer);
 
     const drawnCard = deck.drawCards(1)[0];
     curPlayer.addToHand(drawnCard);
