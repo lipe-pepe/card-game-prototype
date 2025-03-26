@@ -7,6 +7,7 @@ class Player {
   hand: Card[];
   slots: (Card | null)[];
   private result: number | null;
+  private discardCount: number;
 
   constructor(name: string) {
     this.name = name;
@@ -17,6 +18,7 @@ class Player {
     this.hand = [];
     this.slots = [null, null, null, null, null];
     this.result = null;
+    this.discardCount = 0;
   }
 
   #getRandomInt(max: number) {
@@ -82,6 +84,16 @@ class Player {
       expression += card?.symbol;
     });
     return calculateExpression(expression);
+  }
+
+  // ------------------------------------------------------------------------------------
+
+  getDiscardCount() {
+    return this.discardCount;
+  }
+
+  addDiscardCount() {
+    this.discardCount++;
   }
 }
 

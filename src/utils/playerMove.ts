@@ -3,30 +3,48 @@ import askQuestion from "./askQuestion";
 import playerPlaceCard from "./playerPlaceCard";
 import playerSelectCard from "./playerSelectCard";
 import printHand from "./printHand";
+import printWarning from "./printWarning";
+
+const MAX_DISCARDS = 2;
 
 const playerMove = async (player: Player) => {
   let playerInput;
   let cardToDiscard;
+  let options;
 
   printHand(player);
 
-  console.log("\nMake a move.\n\t1 - Discard a card\n\t2 - Use a card");
+  if (player.getDiscardCount() >= MAX_DISCARDS) {
+    options = [1];
+    printWarning(
+      "Max discards reached. You can't discard straight away at this round."
+    );
+
+    console.log("\nMake a move.\n\t1 - Use a card");
+  } else {
+    options = [1, 2];
+    console.log("\nMake a move.\n\t1 - Use a card\n\t2 - Discard a card");
+  }
 
   do {
     playerInput = await askQuestion("\nEnter your move » ");
-    switch (playerInput) {
-      case "1":
+    if (options.includes(Number(playerInput))) {
+      // Selected discard
+      if (playerInput == 2) {
         console.log("\nSelect the card you'll discard:\n");
         cardToDiscard = await playerSelectCard(player);
+        player.addDiscardCount();
         return cardToDiscard;
-      case "2":
+      }
+      // Selected use card
+      else {
         cardToDiscard = await playerPlaceCard(player);
         return cardToDiscard;
-
-      default:
-        console.log("■ Invalid option!");
+      }
+    } else {
+      console.log("■ Invalid option!");
     }
-  } while (playerInput != 1 && playerInput != 2);
+  } while (!options.includes(Number(playerInput)));
 };
 
 export default playerMove;
