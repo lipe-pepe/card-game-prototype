@@ -95,6 +95,10 @@ class Player {
   addDiscardCount() {
     this.discardCount++;
   }
+
+  resetDiscardCount() {
+    this.discardCount = 0;
+  }
 }
 
 export default Player;
