@@ -1,5 +1,6 @@
 export const gameConfig = {
-  maxDiscards: 2,
+  players: 3,
   maxInHand: 3,
-  slots: 10,
+  slots: 5,
+  maxDiscards: 2,
 };

@@ -3,8 +3,8 @@ import calculateExpression from "../utils/calculateExpression";
 import Card from "./card";
 
 class Player {
-  name: string;
-  lifeNumber: number;
+  private name: string;
+  private lifeNumber: number;
   private hand: Card[];
   slots: (Card | null)[];
   private result: number | null;
@@ -48,6 +48,14 @@ class Player {
 
   getDiscardCount() {
     return this.discardCount;
+  }
+
+  getName() {
+    return this.name;
+  }
+
+  getLifeNumber() {
+    return this.lifeNumber;
   }
 
   // -----------------------------------------------------------------------------------
