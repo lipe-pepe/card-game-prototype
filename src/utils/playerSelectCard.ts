@@ -4,15 +4,14 @@ import printError from "./printError";
 
 const playerSelectCard = async (player: Player) => {
   let playerInput;
+  let options = [];
 
-  console.log(
-    `\t1 - [${player.hand[0].symbol}]\n
-    \t2 - [${player.hand[1].symbol}]\n
-    \t3 - [${player.hand[2].symbol}]\n
-    \t4 - [${player.hand[3].symbol}]`
-  );
-
-  const options = [1, 2, 3, 4];
+  // Shows and sets menu
+  for (let i = 0; i < player.getHand().length; i++) {
+    const card = player.getHand()[i];
+    console.log(`\t${i + 1} - ${card.getString()}`);
+    options.push(i + 1);
+  }
 
   do {
     playerInput = await askQuestion("\nEnter option » ");

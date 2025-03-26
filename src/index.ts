@@ -1,5 +1,6 @@
 import Deck from "./classes/deck";
 import Player from "./classes/player";
+import { gameConfig } from "./config/gameConfig";
 import playerMove from "./utils/playerMove";
 import printGame from "./utils/printGame";
 
@@ -9,11 +10,11 @@ async function main() {
   // 1. Set up match
   const deck = new Deck();
 
-  const p1 = new Player("P1");
-  const p2 = new Player("P2");
+  const p1 = new Player("LAURENT");
+  const p2 = new Player("PEPE");
 
-  p1.setHand(deck.drawCards(3));
-  p2.setHand(deck.drawCards(3));
+  p1.setHand(deck.drawCards(gameConfig.maxInHand - 1));
+  p2.setHand(deck.drawCards(gameConfig.maxInHand - 1));
 
   const players = [p1, p2];
   let curPlayerIndex = 0;
@@ -29,7 +30,7 @@ async function main() {
     const drawnCard = deck.drawCards(1)[0];
     curPlayer.addToHand(drawnCard);
     console.log(
-      `${curPlayer.name}, you drawed the card \x1b[${drawnCard.color}m[${drawnCard.symbol}]\x1b[0m!`
+      `${curPlayer.name}, you drawed the card ${drawnCard.getString()}!`
     );
 
     // Every move has to return a card to discard, since the player can't have more than 3 cards in hand
