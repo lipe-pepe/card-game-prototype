@@ -17,7 +17,7 @@ class Player {
     this.lifeNumber = this.#getRandomInt(100);
 
     this.hand = [];
-    this.slots = [null, null, null, null, null];
+    this.slots = this.#generateSlots();
     this.result = null;
     this.discardCount = 0;
   }
@@ -107,6 +107,14 @@ class Player {
 
   #getRandomInt(max: number) {
     return Math.floor(Math.random() * max);
+  }
+
+  #generateSlots() {
+    let arr = [];
+    for (let i = 0; i < gameConfig.slots; i++) {
+      arr.push(null);
+    }
+    return arr;
   }
 }
 
