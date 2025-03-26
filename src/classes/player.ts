@@ -1,10 +1,11 @@
+import { gameConfig } from "../config/gameConfig";
 import calculateExpression from "../utils/calculateExpression";
 import Card from "./card";
 
 class Player {
   name: string;
   lifeNumber: number;
-  hand: Card[];
+  private hand: Card[];
   slots: (Card | null)[];
   private result: number | null;
   private discardCount: number;
@@ -21,17 +22,51 @@ class Player {
     this.discardCount = 0;
   }
 
-  #getRandomInt(max: number) {
-    return Math.floor(Math.random() * max);
+  // -----------------------------------------------------------------------------------
+
+  // Getter methods
+
+  getHand() {
+    return this.hand;
   }
 
+  getResult() {
+    // We can only have a result if all slots are filled with cards
+    if (this.slots.includes(null)) {
+      this.result = null;
+    }
+    // Otherwise, we calculate the result
+    else {
+      let expression = "";
+      this.slots.forEach((card) => {
+        expression += card?.symbol;
+      });
+      this.result = calculateExpression(expression);
+    }
+    return this.result;
+  }
+
+  getDiscardCount() {
+    return this.discardCount;
+  }
+
+  // -----------------------------------------------------------------------------------
+
+  // Setter methods
+
   setHand(cards: Card[]) {
-    if (cards.length == 3 && this.hand.length == 0) {
-      this.hand = cards;
-    } else {
+    if (cards.length > gameConfig.maxInHand) {
       console.error(`Couldn't set new hand for ${this.name}`);
+    } else {
+      this.hand = cards;
     }
   }
+
+  setDiscardCount(value: number) {
+    this.discardCount = value;
+  }
+
+  // -----------------------------------------------------------------------------------
 
   addToHand(card: Card) {
     this.hand.push(card);
@@ -68,36 +103,8 @@ class Player {
 
   // ------------------------------------------------------------------------------------
 
-  getResult() {
-    // We can only have a result if all slots are filled with cards
-    if (this.slots.includes(null)) {
-      this.result = null;
-    } else {
-      this.result = this.calculateResult();
-    }
-    return this.result;
-  }
-
-  calculateResult() {
-    let expression = "";
-    this.slots.forEach((card) => {
-      expression += card?.symbol;
-    });
-    return calculateExpression(expression);
-  }
-
-  // ------------------------------------------------------------------------------------
-
-  getDiscardCount() {
-    return this.discardCount;
-  }
-
-  addDiscardCount() {
-    this.discardCount++;
-  }
-
-  resetDiscardCount() {
-    this.discardCount = 0;
+  #getRandomInt(max: number) {
+    return Math.floor(Math.random() * max);
   }
 }
 

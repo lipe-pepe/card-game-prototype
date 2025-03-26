@@ -29,7 +29,7 @@ const playerMove = async (player: Player) => {
         if (playerInput == 2) {
           console.log("\nSelect the card you'll discard:\n");
           cardToDiscard = await playerSelectCard(player);
-          player.addDiscardCount();
+          player.setDiscardCount(player.getDiscardCount() + 1);
         }
         // Selected use card
         else {

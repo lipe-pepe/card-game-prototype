@@ -40,7 +40,7 @@ const playerPlaceCard = async (player: Player) => {
   // 3. Swap the cards or place the selected card
   if (selectedCard) {
     discardedCard = player.placeCard(selectedSlot, selectedCard);
-    player.resetDiscardCount();
+    player.setDiscardCount(0);
     // Adds the card to the hand
     if (discardedCard != null) {
       player.addToHand(discardedCard);
