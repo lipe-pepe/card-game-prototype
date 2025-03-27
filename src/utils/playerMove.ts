@@ -1,8 +1,8 @@
 import Player from "../classes/player";
 import { gameConfig } from "../config/gameConfig";
 import askQuestion from "./askQuestion";
-import playerPlaceCard from "./playerPlaceCard";
 import playerSelectCard from "./playerSelectCard";
+import playerUseCard from "./playerUseCard";
 import printError from "./printError";
 import printHand from "./printHand";
 import printWarning from "./printWarning";
@@ -18,7 +18,7 @@ const playerMove = async (player: Player) => {
     printWarning(
       `Max discards (${gameConfig.maxDiscards}) reached. You can't discard straight away at this round.`
     );
-    cardToDiscard = await playerPlaceCard(player);
+    cardToDiscard = await playerUseCard(player);
   } else {
     console.log("\nMake a move.\n\t1 - Use a card\n\t2 - Discard a card");
 
@@ -33,7 +33,7 @@ const playerMove = async (player: Player) => {
         }
         // Selected use card
         else {
-          cardToDiscard = await playerPlaceCard(player);
+          cardToDiscard = await playerUseCard(player);
         }
       } else {
         printError("Invalid option!");

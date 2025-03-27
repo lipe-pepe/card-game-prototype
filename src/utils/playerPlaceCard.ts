@@ -1,21 +1,17 @@
+import Card from "../classes/card";
 import Player from "../classes/player";
 import askQuestion from "./askQuestion";
 import playerSelectCard from "./playerSelectCard";
 import printError from "./printError";
 import printHand from "./printHand";
 
-const playerPlaceCard = async (player: Player) => {
+const playerPlaceCard = async (player: Player, card: Card) => {
   let playerInput;
   let discardedCard;
-  let selectedCard;
   let selectedSlot = 0;
   let slotOptions = [];
 
-  // 1. Select the card in hand
-  console.log("\nSelect the card you'll use:\n");
-  selectedCard = await playerSelectCard(player);
-
-  // 2. Select the slot
+  // 1. Select the slot
   console.log("\nIn which slot you want to place the card?\n");
 
   // Prints and sets the options
@@ -37,9 +33,9 @@ const playerPlaceCard = async (player: Player) => {
     }
   } while (!slotOptions.includes(Number(playerInput)));
 
-  // 3. Swap the cards or place the selected card
-  if (selectedCard) {
-    discardedCard = player.placeCard(selectedSlot, selectedCard);
+  // 2. Swap the cards or place the selected card
+  if (card) {
+    discardedCard = player.placeCard(selectedSlot, card);
     player.setDiscardCount(0);
     // Adds the card to the hand
     if (discardedCard != null) {
@@ -47,7 +43,7 @@ const playerPlaceCard = async (player: Player) => {
     }
   }
 
-  // 4. Discards a card if there are 4 cards in hand
+  // 3. Discards a card if there are 4 cards in hand
   if (discardedCard != null) {
     printHand(player);
 
