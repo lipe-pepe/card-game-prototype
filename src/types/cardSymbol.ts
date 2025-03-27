@@ -11,8 +11,8 @@ enum CardSymbol {
   Nine = "9",
   Plus = "+",
   Minus = "-",
-  Multiply = "×",
-  Divide = "÷",
+  Multiply = "*",
+  Divide = "/",
 }
 
 export default CardSymbol;

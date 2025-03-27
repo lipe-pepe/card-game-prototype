@@ -35,10 +35,10 @@ const calculateExpression = (expression: string) => {
       case "-":
         result -= nextNumber;
         break;
-      case "×":
+      case "*":
         result *= nextNumber;
         break;
-      case "÷":
+      case "/":
         if (nextNumber === 0) return null;
         result /= nextNumber;
         break;
