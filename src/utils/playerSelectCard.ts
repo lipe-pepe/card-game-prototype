@@ -3,6 +3,16 @@ import Player from "../classes/player";
 import askQuestion from "./askQuestion";
 import printError from "./printError";
 
+// *** playerSelectCard ***
+//
+// Inputs the player to select one card in their hand
+//
+// params :
+//   - player: The player selecting
+//
+// returns:
+//   - selected: The selected card
+
 const playerSelectCard = async (player: Player): Promise<Card> => {
   let input;
   let options = [];

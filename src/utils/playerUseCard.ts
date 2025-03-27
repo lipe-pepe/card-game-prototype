@@ -8,6 +8,18 @@ import playerSelectCard from "./playerSelectCard";
 import playerSelectOpponent from "./playerSelectOpponent";
 import specialCardDestroy from "./specialCardDestroy";
 
+// *** playerUseCard ***
+//
+// Handles the use of card selected by the player. If it is a normal card, places it.
+// If it is a special card, uses its function
+//
+// params :
+//   - player: The player making the move
+//   - allPlayers: The list of all players in the match
+//
+// returns:
+//   - cardsToDiscard: An array with cards to be discarded
+
 const playerUseCard = async (
   player: Player,
   allPlayers: Player[]

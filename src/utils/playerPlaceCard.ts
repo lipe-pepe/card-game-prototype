@@ -5,6 +5,15 @@ import playerSelectCard from "./playerSelectCard";
 import printError from "./printError";
 import printHand from "./printHand";
 
+// *** playerPlaceCard ***
+//
+// Handles the player placing a card in one of their slots. If the slot is empty, only places it.
+// If the slot is taken, swaps the card in the slot for the new one in the hand.
+//
+// params :
+//   - player: The player placing the card
+//   - card: The card to be placed
+
 const playerPlaceCard = async (player: Player, card: Card) => {
   let playerInput;
   let discardedCard;
