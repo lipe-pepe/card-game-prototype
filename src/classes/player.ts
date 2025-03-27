@@ -82,8 +82,7 @@ class Player {
 
   removeFromHand(position: number) {
     if (position >= 0 && position < this.hand.length) {
-      const removed = this.hand.splice(position, 1)[0];
-      return removed;
+      this.hand.splice(position, 1)[0];
     } else {
       console.error(
         `Couldn't remove card at position ${position} from ${this.name}'s hand`

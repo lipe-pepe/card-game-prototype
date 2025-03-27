@@ -1,3 +1,4 @@
+import { gameConfig } from "../config/gameConfig";
 import { NormalCardColor, NormalCardSymbol } from "../types/cards/normalCard";
 import {
   SpecialCardColor,
@@ -33,12 +34,17 @@ class Deck {
       }
     }
 
-    // Creates the special cards
-    for (let i = 0; i < specialCardColors.length; i++) {
-      for (let j = 0; j < specialCardSymbols.length; j++) {
-        deck.push(new SpecialCard(specialCardSymbols[j], specialCardColors[i]));
+    if (gameConfig.allowSpecialCards) {
+      // Creates the special cards
+      for (let i = 0; i < specialCardColors.length; i++) {
+        for (let j = 0; j < specialCardSymbols.length; j++) {
+          deck.push(
+            new SpecialCard(specialCardSymbols[j], specialCardColors[i])
+          );
+        }
       }
     }
+
     shuffleArray(deck);
 
     return deck;
@@ -57,9 +63,8 @@ class Deck {
     return drawn;
   }
 
-  discardCard(card: Card) {
-    this.discard.push(card);
-    console.log(this.discard);
+  discardCards(cards: Card[]) {
+    this.discard = this.discard.concat(cards);
   }
 }
 

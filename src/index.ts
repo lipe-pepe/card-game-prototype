@@ -52,7 +52,7 @@ async function main() {
     // Every move has to return a card to discard, since the player can't have more than 3 cards in hand
     const discarded = await playerMove(curPlayer, players);
     if (discarded) {
-      deck.discardCard(discarded);
+      deck.discardCards(discarded);
     }
 
     // Checks lose

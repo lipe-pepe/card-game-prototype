@@ -1,3 +1,4 @@
+import Card from "../classes/card";
 import NormalCard from "../classes/normalCard";
 import Player from "../classes/player";
 import SpecialCard from "../classes/specialCard";
@@ -7,9 +8,12 @@ import playerSelectCard from "./playerSelectCard";
 import playerSelectOpponent from "./playerSelectOpponent";
 import specialCardDestroy from "./specialCardDestroy";
 
-const playerUseCard = async (player: Player, allPlayers: Player[]) => {
+const playerUseCard = async (
+  player: Player,
+  allPlayers: Player[]
+): Promise<Card[]> => {
   let selectedCard;
-  let cardToDiscard;
+  let cardsToDiscard: Card[] = [];
 
   // 1. Select the card in hand
   console.log("\nSelect the card you'll use:\n");
@@ -17,16 +21,20 @@ const playerUseCard = async (player: Player, allPlayers: Player[]) => {
 
   // 2. Check card type
   if (selectedCard instanceof NormalCard) {
-    cardToDiscard = await playerPlaceCard(player, selectedCard);
+    await playerPlaceCard(player, selectedCard);
   } else if (selectedCard instanceof SpecialCard) {
+    // Discards the special card
+    cardsToDiscard.push(selectedCard);
+
     // Select the other player
     const selectedPlayer = await playerSelectOpponent(player, allPlayers);
-    console.log(selectedPlayer);
 
     switch (selectedCard.symbol) {
       case SpecialCardSymbol.Destroy:
-        if (selectedPlayer)
-          cardToDiscard = await specialCardDestroy(selectedPlayer);
+        if (selectedPlayer) {
+          const card = await specialCardDestroy(selectedPlayer);
+          cardsToDiscard.push(card);
+        }
         break;
       //   case SpecialCardSymbol.Change:
       //     break;
@@ -39,7 +47,7 @@ const playerUseCard = async (player: Player, allPlayers: Player[]) => {
 
   player.setDiscardCount(0);
 
-  return cardToDiscard;
+  return cardsToDiscard;
 };
 
 export default playerUseCard;

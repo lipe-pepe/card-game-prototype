@@ -1,10 +1,12 @@
+import Card from "../classes/card";
 import Player from "../classes/player";
 import askQuestion from "./askQuestion";
 import printError from "./printError";
 
-const playerSelectCard = async (player: Player) => {
-  let playerInput;
+const playerSelectCard = async (player: Player): Promise<Card> => {
+  let input;
   let options = [];
+  let selectedIndex = 0;
 
   // Shows and sets menu
   for (let i = 0; i < player.getHand().length; i++) {
@@ -14,14 +16,18 @@ const playerSelectCard = async (player: Player) => {
   }
 
   do {
-    playerInput = await askQuestion("\nEnter option » ");
-    if (options.includes(Number(playerInput))) {
-      const selected = player.removeFromHand(Number(playerInput) - 1);
-      return selected;
+    input = await askQuestion("\nEnter option » ");
+    if (options.includes(Number(input))) {
+      selectedIndex = Number(input) - 1;
     } else {
       printError("Invalid option!");
     }
-  } while (!options.includes(Number(playerInput)));
+  } while (!options.includes(Number(input)));
+
+  const selected = player.getHand()[selectedIndex];
+  player.removeFromHand(selectedIndex);
+
+  return selected;
 };
 
 export default playerSelectCard;
