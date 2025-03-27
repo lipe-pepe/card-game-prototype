@@ -1,11 +1,8 @@
-import CardColor from "../types/cardColor";
-import CardSymbol from "../types/cardSymbol";
-
 class Card {
-  symbol: CardSymbol;
-  color: CardColor;
+  symbol: string;
+  color: string;
 
-  constructor(symbol: CardSymbol, color: CardColor) {
+  constructor(symbol: string, color: string) {
     this.symbol = symbol;
     this.color = color;
   }
