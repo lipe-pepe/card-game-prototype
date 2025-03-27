@@ -7,7 +7,7 @@ import printError from "./printError";
 import printHand from "./printHand";
 import printWarning from "./printWarning";
 
-const playerMove = async (player: Player) => {
+const playerMove = async (player: Player, allPlayers: Player[]) => {
   let playerInput;
   let cardToDiscard;
   const options = [1, 2];
@@ -18,7 +18,7 @@ const playerMove = async (player: Player) => {
     printWarning(
       `Max discards (${gameConfig.maxDiscards}) reached. You can't discard straight away at this round.`
     );
-    cardToDiscard = await playerUseCard(player);
+    cardToDiscard = await playerUseCard(player, allPlayers);
   } else {
     console.log("\nMake a move.\n\t1 - Use a card\n\t2 - Discard a card");
 
@@ -33,7 +33,7 @@ const playerMove = async (player: Player) => {
         }
         // Selected use card
         else {
-          cardToDiscard = await playerUseCard(player);
+          cardToDiscard = await playerUseCard(player, allPlayers);
         }
       } else {
         printError("Invalid option!");

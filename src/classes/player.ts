@@ -111,6 +111,17 @@ class Player {
     }
   }
 
+  removeFromSlot(position: number) {
+    if (position >= 0 && position < this.slots.length) {
+      // Removes a card from the slot
+      const removed = this.slots.splice(position, 1, null)[0];
+      if (removed) {
+        console.log(`\n${removed.getString()} removed!`);
+      }
+      return removed;
+    }
+  }
+
   // ------------------------------------------------------------------------------------
 
   #getRandomInt(max: number) {
