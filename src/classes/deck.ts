@@ -1,7 +1,12 @@
-import CardColor from "../types/cardColor";
-import CardSymbol from "../types/cardSymbol";
+import { NormalCardColor, NormalCardSymbol } from "../types/cards/normalCard";
+import {
+  SpecialCardColor,
+  SpecialCardSymbol,
+} from "../types/cards/specialCard";
 import shuffleArray from "../utils/shuffleArray";
 import Card from "./card";
+import NormalCard from "./normalCard";
+import SpecialCard from "./specialCard";
 
 class Deck {
   private deck: Card[];
@@ -13,17 +18,27 @@ class Deck {
   }
 
   #createDeck() {
-    const cardColors = Object.values(CardColor);
-    const cardSymbols = Object.values(CardSymbol);
+    const normalCardColors = Object.values(NormalCardColor);
+    const normalCardSymbols = Object.values(NormalCardSymbol);
+
+    const specialCardColors = Object.values(SpecialCardColor);
+    const specialCardSymbols = Object.values(SpecialCardSymbol);
 
     let deck = [];
 
-    for (let i = 0; i < cardColors.length; i++) {
-      for (let j = 0; j < cardSymbols.length; j++) {
-        deck.push(new Card(cardSymbols[j], cardColors[i]));
+    // Creates the normal cards
+    for (let i = 0; i < normalCardColors.length; i++) {
+      for (let j = 0; j < normalCardSymbols.length; j++) {
+        deck.push(new NormalCard(normalCardSymbols[j], normalCardColors[i]));
       }
     }
 
+    // Creates the special cards
+    for (let i = 0; i < specialCardColors.length; i++) {
+      for (let j = 0; j < specialCardSymbols.length; j++) {
+        deck.push(new SpecialCard(specialCardSymbols[j], specialCardColors[i]));
+      }
+    }
     shuffleArray(deck);
 
     return deck;
