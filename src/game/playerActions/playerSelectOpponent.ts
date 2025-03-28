@@ -1,6 +1,6 @@
-import Player from "../classes/player";
-import askQuestion from "./askQuestion";
-import printError from "../ui/printError";
+import Player from "../../classes/player";
+import askQuestion from "./../../utils/askQuestion";
+import printError from "../../ui/printError";
 
 // *** playerSelectOpponent ***
 //
