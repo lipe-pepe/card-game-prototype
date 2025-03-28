@@ -34,8 +34,8 @@ class Deck {
       }
     }
 
-    if (gameConfig.allowSpecialCards) {
-      // Creates the special cards
+    // Creates the special cards
+    for (let k = 0; k < gameConfig.specialCardsCount; k++) {
       for (let i = 0; i < specialCardColors.length; i++) {
         for (let j = 0; j < specialCardSymbols.length; j++) {
           deck.push(
