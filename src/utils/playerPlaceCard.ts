@@ -1,9 +1,9 @@
 import Card from "../classes/card";
 import Player from "../classes/player";
+import printError from "../ui/printError";
+import printHand from "../ui/printHand";
 import askQuestion from "./askQuestion";
 import playerSelectCard from "./playerSelectCard";
-import printError from "./printError";
-import printHand from "./printHand";
 
 // *** playerPlaceCard ***
 //

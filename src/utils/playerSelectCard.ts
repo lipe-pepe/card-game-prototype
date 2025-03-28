@@ -1,7 +1,7 @@
 import Card from "../classes/card";
 import Player from "../classes/player";
 import askQuestion from "./askQuestion";
-import printError from "./printError";
+import printError from "../ui/printError";
 
 // *** playerSelectCard ***
 //

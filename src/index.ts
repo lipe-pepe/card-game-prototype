@@ -1,10 +1,10 @@
 import Deck from "./classes/deck";
 import Player from "./classes/player";
 import { gameConfig } from "./config/gameConfig";
+import printError from "./ui/printError";
+import printGame from "./ui/printGame";
 import askQuestion from "./utils/askQuestion";
 import playerMove from "./utils/playerMove";
-import printError from "./utils/printError";
-import printGame from "./utils/printGame";
 
 async function main() {
   console.clear();
