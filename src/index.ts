@@ -25,7 +25,6 @@ async function main() {
     } while (name === "");
     // Configures player
     const p = new Player(String(name));
-    p.setHand(deck.drawCards(gameConfig.maxInHand - 1));
 
     // Adds player to the player list
     players.push(p);
@@ -43,13 +42,19 @@ async function main() {
 
     printGame(players, curPlayer);
 
-    const drawnCard = deck.drawCards(1)[0];
-    curPlayer.addToHand(drawnCard);
+    // Draws cards for the player to fill their hand
+    const drawnCards = deck.drawCards(
+      gameConfig.maxInHand - curPlayer.getHand().length
+    );
+    curPlayer.addToHand(drawnCards);
     console.log(
-      `${curPlayer.getName()}, you drawed the card ${drawnCard.getString()}!`
+      `${curPlayer.getName()}, you drawed the cards ${drawnCards
+        .map((c) => c.getString())
+        .join(",")}!`
     );
 
-    // Every move has to return a card to discard, since the player can't have more than 3 cards in hand
+    // The player can make a move with all of their cards
+    // Every move has to return cards to discard, since the player can't have more than 3 cards in hand
     const discarded = await playerMove(curPlayer, players);
     if (discarded) {
       deck.discardCards(discarded);

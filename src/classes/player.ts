@@ -61,23 +61,14 @@ class Player {
   // -----------------------------------------------------------------------------------
 
   // Setter methods
-
-  setHand(cards: Card[]) {
-    if (cards.length > gameConfig.maxInHand) {
-      console.error(`Couldn't set new hand for ${this.name}`);
-    } else {
-      this.hand = cards;
-    }
-  }
-
   setDiscardCount(value: number) {
     this.discardCount = value;
   }
 
   // -----------------------------------------------------------------------------------
 
-  addToHand(card: Card) {
-    this.hand.push(card);
+  addToHand(cards: Card[]) {
+    this.hand = this.hand.concat(cards);
   }
 
   removeFromHand(position: number) {

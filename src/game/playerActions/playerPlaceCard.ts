@@ -47,16 +47,8 @@ const playerPlaceCard = async (player: Player, card: Card) => {
     discardedCard = player.placeCard(selectedSlot, card);
     // Adds the card to the hand
     if (discardedCard != null) {
-      player.addToHand(discardedCard);
+      player.addToHand([discardedCard]);
     }
-  }
-
-  // 3. Discards a card if there are 4 cards in hand
-  if (discardedCard != null) {
-    printHand(player);
-
-    console.log("\nSelect a card to discard:\n");
-    discardedCard = await playerSelectCard(player);
   }
 };
 

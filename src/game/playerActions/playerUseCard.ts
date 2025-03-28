@@ -58,7 +58,7 @@ const playerUseCard = async (
           `\nYou stole ${selectedPlayer.getName()}'s ${selectedOpponentCard.getString()}!`
         );
         // Adds opponent card to player's hand
-        player.addToHand(selectedOpponentCard);
+        player.addToHand([selectedOpponentCard]);
 
         // Queries player to discard another card:
         console.log("\nSelect the card you'll discard:\n");

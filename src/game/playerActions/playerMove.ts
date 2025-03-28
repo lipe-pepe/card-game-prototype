@@ -2,6 +2,7 @@ import Card from "../../classes/card";
 import Player from "../../classes/player";
 import { gameConfig } from "../../config/gameConfig";
 import printError from "../../ui/printError";
+import printGame from "../../ui/printGame";
 import printHand from "../../ui/printHand";
 import printWarning from "../../ui/printWarning";
 import askQuestion from "../../utils/askQuestion";
@@ -20,42 +21,59 @@ import playerUseCard from "./playerUseCard";
 //   - cardsToDiscard: An array of cards to discard
 
 const playerMove = async (player: Player, allPlayers: Player[]) => {
-  let playerInput;
+  let input;
   let cardsToDiscard: Card[] = [];
-  const options = [1, 2];
+  const options = [1, 2, 3];
 
-  // 1. Shows current hand
-  printHand(player);
+  // The player can make a move with all of their cards
+  while (player.getHand().length > 0) {
+    console.log(`\n-> ${player.getName()}'s turn <-`);
 
-  // 2. Handles max discards
-  if (player.getDiscardCount() >= gameConfig.maxDiscards) {
-    printWarning(
-      `Max discards (${gameConfig.maxDiscards}) reached. You can't discard straight away at this round.`
-    );
-    const cards = await playerUseCard(player, allPlayers);
-    cardsToDiscard = cardsToDiscard.concat(cards);
-  } else {
-    console.log("\nMake a move.\n\t1 - Use a card\n\t2 - Discard a card");
+    // 1. Shows current hand
+    printHand(player);
 
-    do {
-      playerInput = await askQuestion("\nEnter your move » ");
-      if (options.includes(Number(playerInput))) {
-        // Player selected discard
-        if (playerInput == 2) {
+    // 2. Handles max discards (only if it is enabled)
+    if (
+      player.getDiscardCount() >= gameConfig.maxDiscards &&
+      gameConfig.maxDiscards != 0
+    ) {
+      printWarning(
+        `\nMax discards (${gameConfig.maxDiscards}) reached. You can't discard straight away at this round.`
+      );
+      const cards = await playerUseCard(player, allPlayers);
+      cardsToDiscard = cardsToDiscard.concat(cards);
+    } else {
+      console.log(
+        "\nMake a move.\n\t1 - Use a card\n\t2 - Discard a card\n\t3 - Pass"
+      );
+
+      do {
+        input = await askQuestion("\nEnter your move » ");
+        if (!options.includes(Number(input))) printError("Invalid option!");
+      } while (!options.includes(Number(input)));
+
+      switch (Number(input)) {
+        // Player selected 'Use'
+        case 1:
+          const cards = await playerUseCard(player, allPlayers);
+          cardsToDiscard = cardsToDiscard.concat(cards);
+          console.clear();
+          printGame(allPlayers, player);
+          break;
+        // Player selected 'Discard'
+        case 2:
           console.log("\nSelect the card you'll discard:\n");
           const card = await playerSelectCard(player);
           cardsToDiscard.push(card);
           player.setDiscardCount(player.getDiscardCount() + 1);
-        }
-        // Player selected use card
-        else {
-          const cards = await playerUseCard(player, allPlayers);
-          cardsToDiscard = cardsToDiscard.concat(cards);
-        }
-      } else {
-        printError("Invalid option!");
+          break;
+        // Player selected 'Pass'
+        case 3:
+          return cardsToDiscard;
+        default:
+          break;
       }
-    } while (!options.includes(Number(playerInput)));
+    }
   }
 
   return cardsToDiscard;
