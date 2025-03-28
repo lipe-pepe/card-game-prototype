@@ -6,8 +6,7 @@ enum SpecialCardColor {
 }
 
 enum SpecialCardSymbol {
-  // Steal = "S",
-  // Change = "C",
+  Steal = "S",
   Destroy = "D",
 }
 

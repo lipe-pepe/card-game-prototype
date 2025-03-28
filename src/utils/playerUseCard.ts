@@ -45,17 +45,26 @@ const playerUseCard = async (
     // Select the opponents card
     selectedOpponentCard = await playerSelectOpponentCard(selectedPlayer);
 
+    // Removes card from the opponents slot
+    selectedPlayer.removeCardFromSlot(selectedOpponentCard);
+
     switch (selectedCard.symbol) {
       case SpecialCardSymbol.Destroy:
-        // Removes card from the opponents slot
-        selectedPlayer.removeCardFromSlot(selectedOpponentCard);
+        // Adds cards to the discard list
         cardsToDiscard.push(selectedOpponentCard);
-        cardsToDiscard.push(selectedCard);
         break;
-      //   case SpecialCardSymbol.Change:
-      //     break;
-      //   case SpecialCardSymbol.Steal:
-      //     break;
+      case SpecialCardSymbol.Steal:
+        console.log(
+          `\nYou stole ${selectedPlayer.getName()}'s ${selectedOpponentCard.getString()}!`
+        );
+        // Adds opponent card to player's hand
+        player.addToHand(selectedOpponentCard);
+
+        // Queries player to discard another card:
+        console.log("\nSelect the card you'll discard:\n");
+        const card = await playerSelectCard(player);
+        cardsToDiscard.push(card);
+        break;
       default:
         console.error("Invalid special card option!");
     }
