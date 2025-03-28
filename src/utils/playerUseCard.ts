@@ -6,7 +6,7 @@ import { SpecialCardSymbol } from "../types/cards/specialCard";
 import playerPlaceCard from "./playerPlaceCard";
 import playerSelectCard from "./playerSelectCard";
 import playerSelectOpponent from "./playerSelectOpponent";
-import specialCardDestroy from "./specialCardDestroy";
+import playerSelectOpponentCard from "./playerSelectOpponentCard";
 
 // *** playerUseCard ***
 //
@@ -25,6 +25,7 @@ const playerUseCard = async (
   allPlayers: Player[]
 ): Promise<Card[]> => {
   let selectedCard;
+  let selectedOpponentCard;
   let cardsToDiscard: Card[] = [];
 
   // 1. Select the card in hand
@@ -41,12 +42,15 @@ const playerUseCard = async (
     // Select the other player
     const selectedPlayer = await playerSelectOpponent(player, allPlayers);
 
+    // Select the opponents card
+    selectedOpponentCard = await playerSelectOpponentCard(selectedPlayer);
+
     switch (selectedCard.symbol) {
       case SpecialCardSymbol.Destroy:
-        if (selectedPlayer) {
-          const card = await specialCardDestroy(selectedPlayer);
-          cardsToDiscard.push(card);
-        }
+        // Removes card from the opponents slot
+        selectedPlayer.removeCardFromSlot(selectedOpponentCard);
+        cardsToDiscard.push(selectedOpponentCard);
+        cardsToDiscard.push(selectedCard);
         break;
       //   case SpecialCardSymbol.Change:
       //     break;
