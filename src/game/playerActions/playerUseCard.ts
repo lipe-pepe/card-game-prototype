@@ -1,8 +1,8 @@
-import Card from "../classes/card";
-import NormalCard from "../classes/normalCard";
-import Player from "../classes/player";
-import SpecialCard from "../classes/specialCard";
-import { SpecialCardSymbol } from "../types/cards/specialCard";
+import Card from "../../classes/card";
+import NormalCard from "../../classes/normalCard";
+import Player from "../../classes/player";
+import SpecialCard from "../../classes/specialCard";
+import { SpecialCardSymbol } from "../../types/cards/specialCard";
 import playerPlaceCard from "./playerPlaceCard";
 import playerSelectCard from "./playerSelectCard";
 import playerSelectOpponent from "./playerSelectOpponent";

@@ -1,10 +1,10 @@
-import Card from "../classes/card";
-import Player from "../classes/player";
-import { gameConfig } from "../config/gameConfig";
-import printError from "../ui/printError";
-import printHand from "../ui/printHand";
-import printWarning from "../ui/printWarning";
-import askQuestion from "./askQuestion";
+import Card from "../../classes/card";
+import Player from "../../classes/player";
+import { gameConfig } from "../../config/gameConfig";
+import printError from "../../ui/printError";
+import printHand from "../../ui/printHand";
+import printWarning from "../../ui/printWarning";
+import askQuestion from "../../utils/askQuestion";
 import playerSelectCard from "./playerSelectCard";
 import playerUseCard from "./playerUseCard";
 

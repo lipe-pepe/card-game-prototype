@@ -4,7 +4,7 @@ import { gameConfig } from "./config/gameConfig";
 import printError from "./ui/printError";
 import printGame from "./ui/printGame";
 import askQuestion from "./utils/askQuestion";
-import playerMove from "./utils/playerMove";
+import playerMove from "./game/playerActions/playerMove";
 
 async function main() {
   console.clear();
