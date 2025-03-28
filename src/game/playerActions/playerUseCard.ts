@@ -59,11 +59,6 @@ const playerUseCard = async (
         );
         // Adds opponent card to player's hand
         player.addToHand([selectedOpponentCard]);
-
-        // Queries player to discard another card:
-        console.log("\nSelect the card you'll discard:\n");
-        const card = await playerSelectCard(player);
-        cardsToDiscard.push(card);
         break;
       default:
         console.error("Invalid special card option!");
