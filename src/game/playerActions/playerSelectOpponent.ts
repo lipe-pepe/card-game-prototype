@@ -1,6 +1,7 @@
 import Player from "../../classes/player";
 import askQuestion from "./../../utils/askQuestion";
 import printError from "../../ui/printError";
+import enterNumber from "../../utils/enterNumber";
 
 // *** playerSelectOpponent ***
 //
@@ -32,12 +33,7 @@ const playerSelectOpponent = async (player: Player, allPlayers: Player[]) => {
     options.push(i);
   }
 
-  do {
-    input = await askQuestion("\nEnter number » ");
-    if (!options.includes(Number(input))) {
-      printError("Invalid option!");
-    }
-  } while (!options.includes(Number(input)));
+  input = await enterNumber(options);
 
   return opponents[Number(input) - 1];
 };

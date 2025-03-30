@@ -7,12 +7,16 @@ import askQuestion from "./utils/askQuestion";
 import playerMove from "./game/playerActions/playerMove";
 
 async function main() {
+  // Declares variables
+  let players: Player[] = [];
+  let curPlayerIndex = 0;
+  let curPlayer = players[curPlayerIndex];
+  let gameOver = false;
+
   console.clear();
 
   // 1. Set up match
   const deck = new Deck();
-
-  let players: Player[] = [];
 
   // Creates all players
   for (let i = 1; i <= gameConfig.players; i++) {
@@ -29,10 +33,6 @@ async function main() {
     // Adds player to the player list
     players.push(p);
   }
-
-  let curPlayerIndex = 0;
-  let curPlayer = players[curPlayerIndex];
-  let gameOver = false;
 
   // 2. Game loop
   while (!gameOver) {
@@ -53,8 +53,6 @@ async function main() {
         .join(",")}!`
     );
 
-    // The player can make a move with all of their cards
-    // Every move has to return cards to discard, since the player can't have more than 3 cards in hand
     const discarded = await playerMove(curPlayer, players);
     if (discarded) {
       deck.discardCards(discarded);

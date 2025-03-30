@@ -6,6 +6,7 @@ import printGame from "../../ui/printGame";
 import printHand from "../../ui/printHand";
 import printWarning from "../../ui/printWarning";
 import askQuestion from "../../utils/askQuestion";
+import enterNumber from "../../utils/enterNumber";
 import playerSelectCard from "./playerSelectCard";
 import playerUseCard from "./playerUseCard";
 
@@ -47,10 +48,7 @@ const playerMove = async (player: Player, allPlayers: Player[]) => {
         "\nMake a move.\n\t1 - Use a card\n\t2 - Discard a card\n\t3 - Pass"
       );
 
-      do {
-        input = await askQuestion("\nEnter your move » ");
-        if (!options.includes(Number(input))) printError("Invalid option!");
-      } while (!options.includes(Number(input)));
+      input = await enterNumber(options);
 
       switch (Number(input)) {
         // Player selected 'Use'

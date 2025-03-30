@@ -1,9 +1,6 @@
 import Card from "../../classes/card";
 import Player from "../../classes/player";
-import printError from "../../ui/printError";
-import printHand from "../../ui/printHand";
-import askQuestion from "../../utils/askQuestion";
-import playerSelectCard from "./playerSelectCard";
+import enterNumber from "../../utils/enterNumber";
 
 // *** playerPlaceCard ***
 //
@@ -14,11 +11,13 @@ import playerSelectCard from "./playerSelectCard";
 //   - player: The player placing the card
 //   - card: The card to be placed
 
-const playerPlaceCard = async (player: Player, card: Card) => {
-  let playerInput;
-  let discardedCard;
+const playerPlaceCard = async (
+  player: Player,
+  card: Card
+): Promise<Card | null> => {
+  let input;
   let selectedSlot = 0;
-  let slotOptions = [];
+  let options = [];
 
   // 1. Select the slot
   console.log("\nIn which slot you want to place the card?\n");
@@ -30,26 +29,15 @@ const playerPlaceCard = async (player: Player, card: Card) => {
     } else {
       console.log(`\t${i} - Empty`);
     }
-    slotOptions.push(i);
+    options.push(i);
   }
 
-  do {
-    playerInput = await askQuestion("\nEnter number » ");
-    if (slotOptions.includes(Number(playerInput))) {
-      selectedSlot = Number(playerInput) - 1;
-    } else {
-      printError("Invalid option!");
-    }
-  } while (!slotOptions.includes(Number(playerInput)));
+  input = await enterNumber(options);
+  selectedSlot = Number(input) - 1;
 
-  // 2. Swap the cards or place the selected card
-  if (card) {
-    discardedCard = player.placeCard(selectedSlot, card);
-    // Adds the card to the hand
-    if (discardedCard != null) {
-      player.addToHand([discardedCard]);
-    }
-  }
+  // 2. Place the selected card
+  const discardedCard = player.placeCard(selectedSlot, card);
+  return discardedCard || null;
 };
 
 export default playerPlaceCard;

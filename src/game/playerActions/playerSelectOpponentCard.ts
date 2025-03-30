@@ -2,6 +2,7 @@ import Card from "../../classes/card";
 import Player from "../../classes/player";
 import askQuestion from "./../../utils/askQuestion";
 import printError from "../../ui/printError";
+import enterNumber from "../../utils/enterNumber";
 
 // *** playerSelectOpponentCard ***
 //
@@ -16,7 +17,7 @@ import printError from "../../ui/printError";
 const playerSelectOpponentCard = async (opponent: Player): Promise<Card> => {
   let input;
   let selectedCard: Card;
-  let slotOptions = [];
+  let options = [];
 
   console.log(`\nWhich of ${opponent.getName()}'s card do you select?\n`);
 
@@ -25,15 +26,10 @@ const playerSelectOpponentCard = async (opponent: Player): Promise<Card> => {
   // Prints and sets the options
   for (let i = 1; i <= availableCards.length; i++) {
     console.log(`\t${i} - ${availableCards[i - 1]?.getString()}`);
-    slotOptions.push(i);
+    options.push(i);
   }
 
-  do {
-    input = await askQuestion("\nEnter number » ");
-    if (!slotOptions.includes(Number(input))) {
-      printError("Invalid option!");
-    }
-  } while (!slotOptions.includes(Number(input)));
+  input = await enterNumber(options);
 
   selectedCard = availableCards[Number(input) - 1];
   return selectedCard;

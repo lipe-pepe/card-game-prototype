@@ -34,7 +34,10 @@ const playerUseCard = async (
 
   // 2. Check card type
   if (selectedCard instanceof NormalCard) {
-    await playerPlaceCard(player, selectedCard);
+    const card = await playerPlaceCard(player, selectedCard);
+    if (card) {
+      cardsToDiscard.push(card);
+    }
   } else if (selectedCard instanceof SpecialCard) {
     // Discards the special card
     cardsToDiscard.push(selectedCard);
