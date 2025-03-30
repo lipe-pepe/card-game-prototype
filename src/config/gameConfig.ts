@@ -13,7 +13,7 @@
 export const gameConfig = {
   players: 2,
   maxInHand: 3,
-  slots: 5,
+  slots: 6,
   maxDiscards: 0,
   specialCardsCount: 2,
 };
