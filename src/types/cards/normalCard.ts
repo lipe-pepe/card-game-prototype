@@ -21,8 +21,8 @@ enum NormalCardSymbol {
   Nine = "9",
   Plus = "+",
   Minus = "-",
-  Multiply = "*",
-  Divide = "/",
+  Multiply = "×",
+  Divide = "÷",
 }
 
 export { NormalCardColor, NormalCardSymbol };

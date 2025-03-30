@@ -1,3 +1,5 @@
+import { NormalCardSymbol } from "../types/cards/normalCard";
+
 const calculateExpression = (expression: string) => {
   let firstMatch;
   let result;
@@ -19,7 +21,7 @@ const calculateExpression = (expression: string) => {
 
   // Extracts the numbers and operators from the rest
   let numbers = rest.match(/\d+/g) || [];
-  let operators = rest.match(/[\+\-\*\/]/g) || [];
+  let operators = rest.match(/[\+\-\×\÷]/g) || [];
 
   // If there are more operators than numbers, is invalid
   if (operators.length > numbers?.length) return null;
@@ -29,16 +31,16 @@ const calculateExpression = (expression: string) => {
     let nextNumber = parseInt(numbers[i], 10);
 
     switch (operators[i]) {
-      case "+":
+      case NormalCardSymbol.Plus:
         result += nextNumber;
         break;
-      case "-":
+      case NormalCardSymbol.Minus:
         result -= nextNumber;
         break;
-      case "*":
+      case NormalCardSymbol.Multiply:
         result *= nextNumber;
         break;
-      case "/":
+      case NormalCardSymbol.Divide:
         if (nextNumber === 0) return null;
         result /= nextNumber;
         break;
